@@ -25,3 +25,14 @@
 
 ### Requisitos para execucao
  - Arquivo requirements.txt neste mesmo repo;
+
+### Instancia mongodb deployada para armazenamento dos dados:
+``
+ $ export DATADIR=/home/jobernardes/Documents/Projects/personal_auditLogs/database/data
+ $ docker run \
+ --name auditdb3 \
+ -p 27017:27017 \
+ -v $DATADIR:/data/db \
+ -d mongo:latest``
+
+ Obs.: Alterar
