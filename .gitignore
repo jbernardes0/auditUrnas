@@ -1,0 +1,4 @@
+database
+__pycache__
+geckodriver.log
+personal_auditlogs
