@@ -36,4 +36,4 @@
  -d mongo:latest
  ```
 
- Obs.: Alterar
+ Obs.: Alterar DATADIR para um local apropriado para manter o datadir do container mongoDB

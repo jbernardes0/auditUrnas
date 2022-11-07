@@ -2,7 +2,7 @@ from base64 import encode
 from genericpath import isfile
 import pprint
 import csv
-import os
+import os, shutil
 
 from mongo_methods import insertMany, insertOne, mongodb_conn
 
@@ -46,5 +46,6 @@ for filename in os.listdir(csv_dir):
     f = os.path.join(csv_dir, filename)
     if os.path.isfile(f):
         digest_csv(f)
+        shutil.move(f, csv_dir + "processados/")
 
 # EOF
