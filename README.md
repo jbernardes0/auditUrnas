@@ -37,3 +37,13 @@
  ```
 
  Obs.: Alterar DATADIR para um local apropriado para manter o datadir do container mongoDB
+
+
+
+
+### To-do
+1 - Adicionar argparse para simpliciar as chamadas do log_getter.py em container
+2 - Adicionar utilitário para log das atividades, para facilitar controle de apuração
+3 - Adicionar configreader para simplificar gestão de customizações
+4 - Criar dockerfile para log_getter.py
+5 - Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
