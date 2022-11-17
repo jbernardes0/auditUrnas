@@ -24,7 +24,7 @@ Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou
     - Como avaliar discrepancias fortes entre filtros regionais de maneira autonoma?
 
 ## To-do
- - ~~Adicionar argparse para simplificar as chamadas do log_getter.py em container ~~
+ - ~~Adicionar argparse para simplificar as chamadas do log_getter.py em container~~
  - ~~Adicionar utilitário para log das atividades, para facilitar controle de apuração~~
  - ~~Adicionar configparse para simplificar gestão de customizações~~
  - Criar dockerfile para log_getter.py - Deu preguica aqui... Webdriver nao funciona nem por reza dentro do container. Rodando manualmente baremetal msm. Preguica generalizou pras demais apps. Roda tudo na mão e seja feliz...
