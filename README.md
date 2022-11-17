@@ -32,13 +32,13 @@ Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou
  - Criar dashes 
 
 ## Como utilizar:
- 1 - Faca o deploy do dockerfile da instancia mongodb. 
- 2 - "Dah o curl" aí no site do TSE pra pegar os boletins consolidados por estado, pra ter a lista completa das urnas. 
+ - 1 - Faca o deploy do dockerfile da instancia mongodb. 
+ - 2 - "Dah o curl" aí no site do TSE pra pegar os boletins consolidados por estado, pra ter a lista completa das urnas. 
      https://dados.gov.br/dataset/resultados-2022-boletim-de-urna
- 3 - Roda o python 'consolida_ze.py' pra criar a collection 'zonas_eleitorais' contendo as informacoes de todas as urnas. 
- 4 - Roda o python 'log_getter.py' pra fazer web scrapping no TSE e baixar os zips contendo os logs de cada uma das urnas (nao precisa aguardar o termino). 
- 5 - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs. 
- 6 - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais. 
+ - 3 - Roda o python 'consolida_ze.py' pra criar a collection 'zonas_eleitorais' contendo as informacoes de todas as urnas. 
+ - 4 - Roda o python 'log_getter.py' pra fazer web scrapping no TSE e baixar os zips contendo os logs de cada uma das urnas (nao precisa aguardar o termino). 
+ - 5 - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs. 
+ - 6 - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais. 
 
 ### Requisitos para execucao
  - Arquivo requirements.txt neste mesmo repo;
