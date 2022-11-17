@@ -1,0 +1,12 @@
+FROM mongo:latest
+
+RUN apt-get -y update && apt-get install -y \
+  vim \
+  procps \
+  net-tools \
+  htop \
+  findutils \
+  telnet \
+  && rm -rf /var/lib/apt/lists/*
+
+EXPOSE 27017/tcp

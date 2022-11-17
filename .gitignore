@@ -2,3 +2,6 @@ database
 __pycache__
 geckodriver.log
 personal_auditlogs
+logs
+source/log
+source/__pycache__

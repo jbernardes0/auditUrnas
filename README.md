@@ -3,6 +3,16 @@
 
 ## Auditoria de dados publicos do TSE
 
+### Como utilizar:
+ - Faca o delloy do dockerfile da instancia mongodb
+ - "Dah o curl" aí no site do TSE pra pegar os boletins consolidados por estado, pra ter a lista completa das urnas
+     https://dados.gov.br/dataset/resultados-2022-boletim-de-urna
+ - Roda o python 'consolida_ze.py' pra criar a collection 'zonas_eleitorais' contendo as informacoes de todas as urnas
+ - Roda o python 'log_getter.py' pra fazer web scrapping no TSE e baixar os zips contendo os logs de cada uma das urnas (nao precisa aguardar o termino)
+ - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs
+ - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais
+
+
 ### Objetivos:
 
  1 - Obter lista de zonas, seções e nr local votação (mubu - municipio??) por estado;
@@ -26,24 +36,52 @@
 ### Requisitos para execucao
  - Arquivo requirements.txt neste mesmo repo;
 
+
+### Container network
+# Docker internal Network
+```
+docker network create --subnet=172.118.0.0/16 auditbu-subnet-1
+```
+Nem precisa, desisti conteinerizar as apps... 
+
 ### Instancia mongodb deployada para armazenamento dos dados:
 ```
- $ export DATADIR=/home/jobernardes/Documents/Projects/personal_auditLogs/database/data
+ $ docker build -t boletim-db:0.0.1 -f Dockerfile.db . 
+
+ $ export DATADIR=/home/jobernardes/Documents/Projects/auditBU/database/data
+
  $ docker run \
- --name auditdb3 \
+ --name boletim-db1 \
+ --network=auditbu-subnet-1 --ip 172.118.0.10 \
  -p 27017:27017 \
  -v $DATADIR:/data/db \
- -d mongo:latest
+ -d boletim-db:0.0.1
  ```
 
  Obs.: Alterar DATADIR para um local apropriado para manter o datadir do container mongoDB
 
 
+### Instancia mongodb deployada para coordenar download de boletins:
+```
+ $ mkdir /database && ln -s ln -s /home/jobernardes/Documents/Projects/auditBU/database/boletins/ /database/boletins
+ $ docker build -t boletim-getter:0.0.1 -f Dockerfile.bgetter .
+ $ docker run \
+ --name boletim-getter1 \
+ --network=auditbu-subnet-1 --ip 172.118.0.11 \
+ -v /database/boletins:/database/boletins/ \
+ -d boletim-getter:0.0.1
+
+
+ docker run -d --network=docker-subnet-1 --ip 172.118.0.21 -p 8080:8080 --name app-tomcat-hiflex-1 app-tomcat-hiflex:0.0.11
+ ```
+
+ Obs.: Alterar DATADIR para um local apropriado para manter o datadir do container mongoDB
 
 
 ### To-do
-1 - Adicionar argparse para simpliciar as chamadas do log_getter.py em container
-2 - Adicionar utilitário para log das atividades, para facilitar controle de apuração
-3 - Adicionar configreader para simplificar gestão de customizações
-4 - Criar dockerfile para log_getter.py
+~~ 1 - Adicionar argparse para simplificar as chamadas do log_getter.py em container ~~
+~~ 2 - Adicionar utilitário para log das atividades, para facilitar controle de apuração~~
+~~ 3 - Adicionar configparse para simplificar gestão de customizações~~
+4 - Criar dockerfile para log_getter.py - Deu preguica aqui... Webdriver nao funciona nem por reza dentro do container. Rodando manualmente baremetal msm. Preguica generalizou pras demais apps. Roda tudo na mão e seja feliz...
 5 - Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
+6 - Criar dashes 

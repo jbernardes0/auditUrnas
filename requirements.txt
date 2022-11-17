@@ -1,3 +1,8 @@
 pymongo==4.3.2
 selenium==4.6.0
 tqdm
+webdriver_manager
+pyunpack
+patool
+pandas
+matplotlib
