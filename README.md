@@ -24,21 +24,21 @@ Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou
     - Como avaliar discrepancias fortes entre filtros regionais de maneira autonoma?
 
 ## To-do
-~~ 1 - Adicionar argparse para simplificar as chamadas do log_getter.py em container ~~
-~~ 2 - Adicionar utilitário para log das atividades, para facilitar controle de apuração~~
-~~ 3 - Adicionar configparse para simplificar gestão de customizações~~
-4 - Criar dockerfile para log_getter.py - Deu preguica aqui... Webdriver nao funciona nem por reza dentro do container. Rodando manualmente baremetal msm. Preguica generalizou pras demais apps. Roda tudo na mão e seja feliz...
-5 - Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
-6 - Criar dashes 
+ - ~~Adicionar argparse para simplificar as chamadas do log_getter.py em container ~~
+ - ~~Adicionar utilitário para log das atividades, para facilitar controle de apuração~~
+ - ~~Adicionar configparse para simplificar gestão de customizações~~
+ - Criar dockerfile para log_getter.py - Deu preguica aqui... Webdriver nao funciona nem por reza dentro do container. Rodando manualmente baremetal msm. Preguica generalizou pras demais apps. Roda tudo na mão e seja feliz...
+ - Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
+ - Criar dashes 
 
 ## Como utilizar:
- - Faca o delloy do dockerfile da instancia mongodb
- - "Dah o curl" aí no site do TSE pra pegar os boletins consolidados por estado, pra ter a lista completa das urnas
+ 1 - Faca o deploy do dockerfile da instancia mongodb
+ 2 - "Dah o curl" aí no site do TSE pra pegar os boletins consolidados por estado, pra ter a lista completa das urnas
      https://dados.gov.br/dataset/resultados-2022-boletim-de-urna
- - Roda o python 'consolida_ze.py' pra criar a collection 'zonas_eleitorais' contendo as informacoes de todas as urnas
- - Roda o python 'log_getter.py' pra fazer web scrapping no TSE e baixar os zips contendo os logs de cada uma das urnas (nao precisa aguardar o termino)
- - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs
- - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais
+ 3 - Roda o python 'consolida_ze.py' pra criar a collection 'zonas_eleitorais' contendo as informacoes de todas as urnas
+ 4 - Roda o python 'log_getter.py' pra fazer web scrapping no TSE e baixar os zips contendo os logs de cada uma das urnas (nao precisa aguardar o termino)
+ 5 - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs
+ 6 - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais
 
 ### Requisitos para execucao
  - Arquivo requirements.txt neste mesmo repo;
