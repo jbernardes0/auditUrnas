@@ -35,11 +35,10 @@ Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou
  - 0 - Some preps
   
 ```
-git clone git@github.com:jbernardes0/auditUrnas.git
-cd auditBU
-mkdir -p database/boletins/
-mkdir -p database/urnas
-mkdir -p database/data
+$ git clone git@github.com:jbernardes0/auditUrnas.git && cd auditBU
+$ mkdir -p database/boletins/
+$ mkdir -p database/urnas
+$ mkdir -p database/data
 ```
 
  - 1 - Faca o deploy do dockerfile da instancia mongodb. 
