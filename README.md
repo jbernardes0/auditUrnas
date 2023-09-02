@@ -2,8 +2,20 @@
 
 Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou mitigar desinformacoes relacionadas a fraudes no processo eleitoral.
 
+# Arquitetura do projeto
 
-## Objetivos:
+![alt text](architecture.svg)
+
+## Tecnologias utilizadas:
+- Python
+- Selenium (web scrapping)
+- Docker
+- MongoDB (persistência de documentos)
+- Neo4J (persistência de grafos)
+
+
+---
+# Objetivos:
 
  1 - Obter lista de zonas, seções e nr local votação (mubu - municipio??) por estado;
 
@@ -23,13 +35,32 @@ Projeto de Auditoria de dados publicos do TSE, buscando esclarecer dúvidas e/ou
     - mesmo anterior, filtrando modelo da urna (Avaliar como descobrir se é modelo novo ou não)
     - Como avaliar discrepancias fortes entre filtros regionais de maneira autonoma?
 
-## To-do
- - ~~Adicionar argparse para simplificar as chamadas do log_getter.py em container~~
- - ~~Adicionar utilitário para log das atividades, para facilitar controle de apuração~~
- - ~~Adicionar configparse para simplificar gestão de customizações~~
- - Criar dockerfile para log_getter.py - Deu preguica aqui... Webdriver nao funciona nem por reza dentro do container. Rodando manualmente baremetal msm. Preguica generalizou pras demais apps. Roda tudo na mão e seja feliz...
- - Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
- - Criar dashes 
+---
+# To-do
+ - [] Obter de maneira programática a relação de todas sessões eleitorais
+ - [] Desenvolver scrapper para obter os CSVs com detalhes
+ - [] Conteinerizar log_getter.py (Inspecionar isolamento de codigo)
+ - [] Iniciar escrita do log_processor.py para alimentar a collection vote_metrics 
+ - [] Conteinerizar log_processor
+ - [] Conteinerizar proc_correlation
+
+
+# How-to
+```
+$ git clone git@github.com:jbernardes0/auditUrnas.git && cd auditBU
+$ docker compose up -d
+```
+
+
+---
+
+
+
+
+
+
+
+# Old stuff
 
 ## Como utilizar:
  - 0 - Some preps
@@ -53,16 +84,6 @@ $ pip install -r requirements.txt
  - 6 - Roda o python 'log_digestor.py' pra descoprimir os logs, processar, dar os put na collection 'resultados_de_urna', e deletar os zips+logs. 
  - 7 - Roda o python 'log_reporter.py' pra reportar com pandas e matplotlib algumas metricas legais. 
 
-### Requisitos para execucao
- - Arquivo requirements.txt neste mesmo repo;
-
-
-## Deploy de containers
-### Docker internal Network
-Nem precisa, desisti conteinerizar as apps... 
-```
-docker network create --subnet=172.118.0.0/16 auditbu-subnet-1
-```
 
 ### Instancia mongodb deployada para armazenamento dos dados:
 ```
